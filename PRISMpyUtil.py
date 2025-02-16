@@ -79,7 +79,7 @@ def convolution_cuda_k(img_new, padded_array, kernel_size, mode, k):
         valmin = 9999
         valmax = 0
         val_mean = 0
-        # 在卷积核中计算
+        # Calculated in a convolutional kernel
         for i in range(kernel_size):
             for j in range(kernel_size):
                 val = padded_array[x + i, y + j] * k[i, j]
@@ -189,7 +189,7 @@ def get_datetimecols(gage_df):
 
 
 def fft_per(x):
-    # 傅里叶变换
+    # Fourier transform
     f = np.fft.fft(x)
     fshift = np.fft.fftshift(f)
     fshift[:179] = 0
