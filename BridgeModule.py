@@ -4,9 +4,10 @@ from VectorModule import *
 
 class FactorsCalculator():
     """
-    this class is for calculate the factors used in PRISM and connect it with in-situ points
-    dem: the dimension and resolution must be same in x and y directions
-        gaussian filter is only avalible for pixels currently
+    This class is designed to calculate the factors used in PRISM (Precipitation-Remote Sensing and In-Situ Measurements) and establish a connection with in-situ data points.
+    Requirements:
+        DEM (Digital Elevation Model): The dimensions and resolution must be consistent in both the x and y directions.
+        Gaussian Filter: Currently, the Gaussian filter is only applicable at the pixel level.
     """
 
     def __init__(self, dem_filename, blur_steps, fork_file, gage_dir, gene_fork_file, gene_gage_dir,
