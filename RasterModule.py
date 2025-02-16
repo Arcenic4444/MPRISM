@@ -129,13 +129,13 @@ class DEM():
             input_array = np.array([input_array])
         else:
             im_bands, (im_height, im_width) = 1, input_array.shape
-            # 创建文件
+
 
         driver = gdal.GetDriverByName("GTiff")
         dataset = driver.Create(path, im_width, im_height, im_bands, datatype)
         if (dataset != None):
-            dataset.SetGeoTransform(im_geotrans)  # 写入仿射变换参数
-            dataset.SetProjection(im_proj)  # 写入投影
+            dataset.SetGeoTransform(im_geotrans)  
+            dataset.SetProjection(im_proj)  
         for i in range(im_bands):
             dataset.GetRasterBand(i + 1).WriteArray(input_array[i])
         del dataset
