@@ -7,7 +7,6 @@ class FactorsCalculator():
     this class is for calculate the factors used in PRISM and connect it with in-situ points
     dem: the dimension and resolution must be same in x and y directions
         gaussian filter is only avalible for pixels currently
-
     """
 
     def __init__(self, dem_filename, blur_steps, fork_file, gage_dir, gene_fork_file, gene_gage_dir,
@@ -149,11 +148,11 @@ class FactorsCalculator():
         return fork_df
 
     def __cluster_cal_distance(self, lon1, lat1, lon2, lat2):
-        lon1, lat1, lon2, lat2 = map(math.radians, [float(lon1), float(lat1), float(lon2), float(lat2)])  # 经纬度转换成弧度
+        lon1, lat1, lon2, lat2 = map(math.radians, [float(lon1), float(lat1), float(lon2), float(lat2)])  # Latitude and longitude converted to radians
         dlon = lon2 - lon1
         dlat = lat2 - lat1
         a = math.sin(dlat / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
-        distance = 2 * math.asin(math.sqrt(a)) * 6371 * 1000  # 地球平均半径，6371km
+        distance = 2 * math.asin(math.sqrt(a)) * 6371 * 1000  # Mean radius of the Earth, 6371km
         distance = round(distance, 3)
         return distance
 
@@ -486,7 +485,7 @@ class Regression():
             self.interpolate_dataset = factors.all_forks
 
         # --------------if weights already generated, read it------
-        weight_out_dir = r'F:\AAAA_LLC\AAAA-HH\04_climate\230614-1821PreTmp\0615-PRISM_process\03-PRISM-resultDIR' # 02-PRISM-processDIR
+        weight_out_dir = r'.\03-PRISM-resultDIR' # 02-PRISM-processDIR
         weight_out_csv = os.path.join(weight_out_dir, weight_out_csv)
         if os.path.exists(weight_out_csv):
             weightdf = pandas.read_csv(weight_out_csv)
@@ -671,8 +670,8 @@ if __name__ == '__main__':
     f = FactorsCalculator(
         dem_filename=r'.\00_DEM\mosaic.tif',
         blur_steps=[4, 8, 16, 32, 64, 128],
-        fork_file=r'F:\AAAA_LLC\AAAA-HH\04_climate\230614-1821PreTmp\0615-PRISM_process\00_ForksGages\pfork.txt', # r'.\00_ForksGages\pfork.txt',
-        gage_dir=r'F:\AAAA_LLC\AAAA-HH\04_climate\230614-1821PreTmp\0615-PRISM_process\00_ForksGages', # r'.\00_ForksGages',
+        fork_file=r'.\00_ForksGages\pfork.txt', # r'.\00_ForksGages\pfork.txt',
+        gage_dir=r'.\00_ForksGages', # r'.\00_ForksGages',
         gene_fork_file=r'.\00_InterpolatingPoints\HH_200_fishnet.txt',
         # gene_fork_file=r'.\00-shps\subs_centroids.shp',
         gene_gage_dir=None, influence_radius=50000, minimum_influence_radius=7000,
@@ -681,6 +680,6 @@ if __name__ == '__main__':
         facet_weighting_exponent=2.0)
     r = Regression(factors=f, mode='generate',
                    weight_out_csv=r'weights_all_200_considerLWAspect.csv')  # 'weights_all_200_considerLWAspect.csv'
-    r.time_line(result_dir=r'F:\AAAA_LLC\AAAA-HH\04_climate\230614-1821PreTmp\0615-PRISM_process\03-PRISM-resultDIR\02-PRISM-Main-2000-200_fishnet_considerLWAspect') # result_dir=r'.\03-PRISM-resultDIR\02-PRISM-Main-2000-200_fishnet_considerLWAspect'
+    r.time_line(result_dir=r'.\02-PRISM-Main-2000-200_fishnet_considerLWAspect') 
     # r.time_line(part_flag='prop_component', result_dir=r'./dis_fft_new')
     # r.time_line(part_flag='rest_component', result_dir=r'./dis_fft_new')
