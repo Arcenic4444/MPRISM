@@ -1,0 +1,3 @@
+DEM Coordinate System Requirements:
+- Coordinate System: EPSG:4326 (WGS 84)
+- Spatial Range: The spatial range should exceed the interpolation range by at least 64 pixels.
