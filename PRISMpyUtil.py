@@ -258,7 +258,7 @@ if __name__ == '__main__':
     # print(padded_array)
     # k = np.ones((3 * 2 + 1, 3 * 2 + 1)) * 8
     # convolution_cuda(img_new, padded_array=padded_array, kernel_size=kernel_size, mode=0, k=k)
-    dem_fname = f'./DVH_process_dir/dem_64.tif'
+    dem_fname = f'./01-DEM-Aspect/dem_64.tif'
     dem = RasterModule.DEM(filename=dem_fname)
     a = dem.aspect
     print(a)
