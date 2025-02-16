@@ -1,0 +1,1 @@
+This is the code repository for the precipitation interpolation method tailored for mountainous areas. For more details, please refer to the publication: Lang, L., Tang, C., Gao, X., Li, Z., & Wu, F. (2023). Study on High Spatial Resolution Interpolation Method for Precipitation in Complex Terrain. Acta Geographica Sinica, 78(1), 1–14. (in Chinese)
