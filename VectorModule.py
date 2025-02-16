@@ -60,8 +60,7 @@ class PcpGagePnts(ClimateStations):
 
     def __get_gage_df(self):
         """
-        they may uneven in time, please make sure that your input gauges are in the same time range
-        :return:
+        The input gauges may have uneven time distributions. Please ensure that all gauges used for analysis or interpolation fall within the same time range to maintain consistency and accuracy in the results.
         """
         print(
             f'# -------------------------------Reading gage files-------------------------------#')
@@ -109,7 +108,7 @@ class TmpGagePnts(ClimateStations):
         super().__init__(fork_file, gage_dir)
 
     """
-    make sure the minimum temp interpolated values is less than maximum
+    Ensure that the interpolated minimum temperature values are always less than the interpolated maximum temperature values. This ensures logical consistency and accuracy in the temperature data.
     """
 
     def __get_gage_df(self):
