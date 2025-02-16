@@ -176,8 +176,8 @@ class PcpGenePnts(ClimateStations):
 #
 
 if __name__ == '__main__':
-    pcp = PcpGagePnts(r'.\fork\pfork.txt',
-                      r'.\fork')
+    pcp = PcpGagePnts(r'.\00_ForksGages\pfork.txt',
+                      r'.\00_ForksGages')
     print(pcp.gage_df_perday_frac,pcp.gage_df,pcp.gage_df_smoothed
           )
     # gene_pcp = PcpGenePnts(r'./test_gene.shp')
