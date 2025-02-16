@@ -62,8 +62,7 @@ class FactorsCalculator():
 
     def blur_topography(self):
         """
-        define blur steps, then you will get filtered DEM and the corresponding aspect and slope informations.
-        :return:
+        By applying a series of blurring steps, you will generate a filtered Digital Elevation Model (DEM). This process also produces the corresponding aspect and slope information derived from the filtered DEM.
         """
         # try:
         # with Pool() as P:
@@ -215,12 +214,11 @@ class FactorsCalculator():
 
     def distance_weighting(self, fork_df):
         """
-        we do not confine it to in-situ stations or generated cells so that we can change the grids we want to apply the
-         method(all_df) or just for evaluating(in-situ only), but one should notice that no matter what grids we want to
-         perform the interpolation, the corresponding regression is based on in-situ gages, the weights will change because
-         the related distance change with the positions of cells which are waiting for being interpolated.
-        :param fork_df:
-        :return:
+        Flexibility in Grid Application:
+        This method is not restricted to in-situ stations or pre-generated cells, allowing you to apply it to any grid of your choice. You can use it for general interpolation (all_df) or specifically for evaluation purposes (in-situ only).
+        
+        Important Note:
+        Regardless of the grids selected for interpolation, the underlying regression model is always based on data from in-situ gages. The interpolation weights will vary depending on the positions of the target cells, as the distances between these cells and the in-situ gages influence the calculations.
         """
         print(
             f'# -------------------------------1.2 Calculating distance weights...-------------------------------#')
@@ -338,10 +336,11 @@ class FactorsCalculator():
 
     def cal_effective_terrain_index(self):
         """
-        this determine weather it is valley or mountain's top determined by the filtered DEM,
-        the filter redius changed according to the topography of research area, for DVH, the
-        width of valley typically 3000-10000m
-        :return:
+        Valley and Mountain Top Identification:
+        This process determines whether a location is a valley or a mountain top based on the filtered Digital Elevation Model (DEM). The filter radius is adjusted according to the topography of the research area.
+        
+        For DVH (Down-Valley Height):
+        The typical width of valleys ranges between 3,000 to 10,000 meters.
         """
         print('# -------------------------------calculating effective terrain index-------------------------------#')
         # topographic_index_blur = DEM(dem_array=self.dem0.gaussian_blur(10), dem_info=self.dem0.dem_info)
@@ -403,10 +402,8 @@ class FactorsCalculator():
 
     def __distance_convolution_pool(self, data, distance, mode, kernel_type=None):
         """
-        this is a generalized convolution function
-        it can conduct searching around a point, but not according to the pixels, but real distance
-        :param data:
-        :return:
+        Generalized Convolution Function:
+        This function performs a generalized convolution operation, enabling spatial searching around a given point. Unlike traditional pixel-based methods, this function operates based on real-world distances rather than pixel units.
         """
         distance_pixel = int((distance / 111319.55) / self.base_resolution)
         if distance_pixel == 0:
@@ -437,8 +434,11 @@ class FactorsCalculator():
 
     def cal_posi_nega_terrain(self):
         """
-        this function is for identify positive-negative terrain, negative terrain related to valley, in the same valley, the affect of aspect can be omitted
-        :return:
+        Function Purpose:
+        This function is designed to identify positive and negative terrain. Negative terrain corresponds to valleys, while positive terrain represents other landforms.
+        
+        Key Consideration:
+        Within the same valley, the influence of aspect can be omitted, as it has minimal impact on the terrain classification in such areas.
         """
         step1_smooth = self.__distance_convolution_numba(distance=self.POSI_NAGE_TERRAIN_RADIUS, mode='mean',
                                                          data=self.dem0.dem_array)
