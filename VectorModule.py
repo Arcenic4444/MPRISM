@@ -1,9 +1,6 @@
 import sys, os, glob
 import pandas
 from osgeo import gdal, ogr, osr
-# from qgis import processing
-# from qgis.analysis import QgsNativeAlgorithms
-# from qgis.core import QgsProject, QgsCoordinateReferenceSystem
 from PRISMpyUtil import *
 
 class ClimateStations():
@@ -63,7 +60,7 @@ class PcpGagePnts(ClimateStations):
 
     def __get_gage_df(self):
         """
-        they may uneven in time, please make sure that your input gages are in the same time range
+        they may uneven in time, please make sure that your input gauges are in the same time range
         :return:
         """
         print(
@@ -77,7 +74,7 @@ class PcpGagePnts(ClimateStations):
         for pcpfile in glob.glob(os.path.join(self.gage_dir, 'p[0-9]*.txt')):
             gage_id = pcpfile.split('\\')[-1].split('.')[0][1:]
             if not int(gage_id) in self.fork_df['id'].values:
-                raise Exception("Please check your input files to make sure forks are in correspond with gage files")
+                raise Exception("Please check your input files to make sure the forks are in line with gauge files")
             else:
                 with open(pcpfile) as pcp:
                     content = pcp.readlines()
@@ -121,7 +118,7 @@ class TmpGagePnts(ClimateStations):
         for tmpfile in self.__gage_file:
             gage_id = tmpfile.split(r'\\')[-1].split('.')[0][1:]
             if not gage_id in self.fork_df['id']:
-                raise Exception("Please check your input files to make sure forks are in correspond with gage files")
+                raise Exception("Please check your input files to make sure the forks are in line with gauge files")
             else:
                 with open(tmpfile) as tmp:
                     feng_tmp_value = [m.strip() for m in tmp.readlines()[1:]]
@@ -180,8 +177,8 @@ class PcpGenePnts(ClimateStations):
 #
 
 if __name__ == '__main__':
-    pcp = PcpGagePnts(r'E:\AAAA-LICHENdata\AAAA-HH\04_climate\fork\pfork.txt',
-                      r'E:\AAAA-LICHENdata\AAAA-HH\04_climate\fork')
+    pcp = PcpGagePnts(r'.\fork\pfork.txt',
+                      r'.\fork')
     print(pcp.gage_df_perday_frac,pcp.gage_df,pcp.gage_df_smoothed
           )
     # gene_pcp = PcpGenePnts(r'./test_gene.shp')
